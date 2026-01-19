@@ -1,4 +1,4 @@
-import ApplicationPage from './Pages/ApplicationPage';
+import ApplicationPage from './pages/ApplicationPage';
 
 function App() {
   return (

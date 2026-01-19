@@ -1,8 +1,9 @@
 import type { Application } from "../types/Application";
+import ApplicationCard from "../components/ApplicationCard";
 
 export const mockApplications: Application[] = [
   {
-    id: '2',
+    id: '1',
     company: 'Google',
     position: 'Frontend Engineer',
     status: 'Applied',
@@ -17,20 +18,16 @@ export const mockApplications: Application[] = [
   }
 ];
 
-function ApplicationsPage() {
+function ApplicationPage() {
   return (
     <div>
       <h2>My Applications</h2>
 
       {mockApplications.map((app) => (
-        <div key={app.id} style={{ border: "1px solid #ccc", padding: 12, marginBottom: 10 }}>
-          <h3>{app.company}</h3>
-          <p>{app.role}</p>
-          <strong>{app.status}</strong> | <span>{app.appliedDate}</span>
-        </div>
-      ))}
+        <ApplicationCard key={app.id} application={app} />
+        ))}
     </div>
   );
 }
 
-export default ApplicationsPage;
+export default ApplicationPage;
