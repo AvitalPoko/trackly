@@ -2,6 +2,8 @@ import type {Application} from "../types/Application";
 
 interface Props {
     application: Application;
+    onStatusChange: (id: string, status: string) => void;
+    onDelete: (id: string) => void;
 }
 
 
@@ -17,9 +19,24 @@ function ApplicationCard({application}: Props) {
 
         <h3>{application.company}</h3>
         <p>{application.role}</p>
-        <strong>{application.status}</strong> | {" "}
-        <span>{application.appliedDate}</span>
-        </div>
+        <div>
+        <strong>Status :</strong>{" "}
+        <select
+        value={application.status}
+        onChange={(e) => onStatusChange(application.id, e.target.value)}
+        >
+        <option value="Applied">Applied</option>
+        <option value="Interviewing">Interviewing</option>
+        <option value="Offered">Offered</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Accepted">Accepted</option>
+        </select>
+       </div>
+
+       <p>Date : {application.appliedDate}</p>
+
+       button onCLick={() => onDelete(application.id)}>Delete </button>
+     </div>
     );
 }
 

@@ -19,6 +19,20 @@ export const mockApplications: Application[] = [
 ];
 
 function ApplicationPage() {
+
+  const [apps, setApps] = useState<Application[]>(initialApplications);
+
+  function handleStatusChange(id:string, status:ApplicationStatus){
+    setApps((prev) =>
+        prev.map((app) =>
+        app.id == id ? { ..app , status} : app )
+        );
+  }
+
+  function handleDelete(id:string){
+      setApps((prev) => prev.filter((app) => app.id !== id)
+    }
+  
   return (
     <div>
       <h2>My Applications</h2>
@@ -31,3 +45,5 @@ function ApplicationPage() {
 }
 
 export default ApplicationPage;
+
+
