@@ -1,4 +1,5 @@
-import type {Application} from "../types/Application";
+import React from "react";
+import type { Application } from "../types/Application";
 
 interface Props {
     application: Application;
@@ -35,7 +36,7 @@ function ApplicationCard({application}: Props) {
 
        <p>Date : {application.appliedDate}</p>
 
-       button onCLick={() => onDelete(application.id)}>Delete </button>
+      <button onClick={() => onDelete(application.id)}>Delete</button>
      </div>
     );
 }

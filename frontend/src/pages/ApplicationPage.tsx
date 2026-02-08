@@ -1,45 +1,28 @@
-import type { Application } from "../types/Application";
+import React from "react";
 import ApplicationCard from "../components/ApplicationCard";
+import { useApplications } from "../hooks/useApplications";
+import ApplicationForm from "../components/ApplicationForm";
 
-export const mockApplications: Application[] = [
-  {
-    id: '1',
-    company: 'Google',
-    position: 'Frontend Engineer',
-    status: 'Applied',
-    appliedDate: '2026-01-12',
-  },
-  {
-    id: '2',
-    company: 'Amazon',
-    position: 'Fullstack Developer',
-    status: 'Offered',
-    appliedDate: '2026-01-08',
-  }
-];
+
 
 function ApplicationPage() {
 
-  const [apps, setApps] = useState<Application[]>(initialApplications);
+  const { apps, deleteApplication, updateStatus, addApplication } = useApplications();
 
-  function handleStatusChange(id:string, status:ApplicationStatus){
-    setApps((prev) =>
-        prev.map((app) =>
-        app.id == id ? { ..app , status} : app )
-        );
-  }
 
-  function handleDelete(id:string){
-      setApps((prev) => prev.filter((app) => app.id !== id)
-    }
-  
   return (
     <div>
+         <ApplicationForm  onAdd={addApplication}/>
       <h2>My Applications</h2>
 
-      {mockApplications.map((app) => (
-        <ApplicationCard key={app.id} application={app} />
-        ))}
+      {apps.map((app) => (
+        <ApplicationCard
+          key={app.id}
+          application={app}
+          onDelete={deleteApplication}
+          onStatusChange={updateStatus}
+        />
+      ))}
     </div>
   );
 }
