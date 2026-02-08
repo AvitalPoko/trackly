@@ -8,7 +8,7 @@ interface Props {
 }
 
 
-function ApplicationCard({application, onStatusChange}: Props) {
+function ApplicationCard({application, onStatusChange, onDelete}: Props) {
     return (
         <div
         style={{

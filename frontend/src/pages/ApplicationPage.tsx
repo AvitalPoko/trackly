@@ -3,7 +3,8 @@ import { useState } from "react";
 import ApplicationCard from "../components/ApplicationCard";
 import { useApplications } from "../hooks/useApplications";
 import ApplicationForm from "../components/ApplicationForm";
-import {StatusFilter } from "../components/StatusFilter";
+import Dashboard from "../components/Dashboard";
+import StatusFilter from "../components/StatusFilter";
 
 
 function ApplicationPage() {
@@ -17,6 +18,7 @@ function ApplicationPage() {
 
   return (
     <div>
+          <Dashboard apps={apps} />
          <ApplicationForm  onAdd={addApplication}/>
       <h2>My Applications</h2>
       <StatusFilter value={filterStatus} onChange={setFilterStatus} />

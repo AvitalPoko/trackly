@@ -1,0 +1,37 @@
+/* Dashboard Container */
+.dashboard {
+  padding: 2rem;
+  background: #f9fafb;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.dashboard h2 {
+  margin-bottom: 1.5rem;
+  color: #1f2937;
+  font-size: 1.875rem;
+}
+
+/* Total Applications */
+.dashboard p {
+  font-size: 1.125rem;
+  color: #4b5563;
+  margin-bottom: 1rem;
+}
+
+/* Chart Container */
+.chart-container {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 1.5rem;
+}
+
+.chart-container h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #1f2937;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
