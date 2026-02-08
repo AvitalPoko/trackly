@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import type { Application, ApplicationStatus } from "../types/Application";
 
 const initialApplications: Application[] = [
@@ -19,7 +19,11 @@ const initialApplications: Application[] = [
 ];
 
 export function useApplications() {
-  const [apps, setApps] = useState<Application[]>(initialApplications);
+  const [apps, setApps] = useState<Application[]>(loadApplicationsFromStorage); // Lazy initialization to load from localStorage only on first render
+
+  useEffect(() => {
+    localStorage.setItem("trackly_apps", JSON.stringify(apps));
+  }, [apps]);
 
   function addApplication(app: Omit<Application, "id">) {
     const newApp: Application = {
@@ -38,6 +42,15 @@ export function useApplications() {
       prev.map((a) => (a.id === id ? { ...a, status } : a))
     );
   }
+
+  function loadApplicationsFromStorage(){
+      const storedApps = localStorage.getItem("trackly_apps");
+      if(storedApps) {
+          return JSON.parse(storedApps);
+       }
+   return initialApplications;
+  }
+
 
   return {
     apps,

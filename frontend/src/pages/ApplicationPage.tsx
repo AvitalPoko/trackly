@@ -1,8 +1,9 @@
 import React from "react";
+import { useState } from "react";
 import ApplicationCard from "../components/ApplicationCard";
 import { useApplications } from "../hooks/useApplications";
 import ApplicationForm from "../components/ApplicationForm";
-
+import {StatusFilter } from "../components/StatusFilter";
 
 
 function ApplicationPage() {
@@ -10,12 +11,16 @@ function ApplicationPage() {
   const { apps, deleteApplication, updateStatus, addApplication } = useApplications();
 
 
+  const [filterStatus, setFilterStatus] = useState("All"); //All categories by default
+
+  const filteredApps = filterStatus === "All" ? apps : apps.filter((app) => app.status === filterStatus);
+
   return (
     <div>
          <ApplicationForm  onAdd={addApplication}/>
       <h2>My Applications</h2>
-
-      {apps.map((app) => (
+      <StatusFilter value={filterStatus} onChange={setFilterStatus} />
+      {filteredApps.map((app) => (
         <ApplicationCard
           key={app.id}
           application={app}
