@@ -48,15 +48,57 @@ function Dashboard({ apps }: DashboardProps) {
 
   return (
     <div className="dashboard">
-      <h2>Dashboard</h2>
-      <p>Total Applications: {totalApplications}</p>
+      {/* Header */}
+      <div className="dashboard-header">
+        <h2>📊 Dashboard</h2>
+        <p>Track your job search progress</p>
+      </div>
 
-      {apps.length > 0 && (
+      {/* Stats Grid */}
+      <div className="stats-grid">
+        {/* Total Applications Card */}
+        <div className="stat-card stat-card-blue">
+          <div className="stat-card-content">
+            <p>Total Applications</p>
+            <p className="stat-value">{totalApplications}</p>
+          </div>
+          <div className="stat-icon">📝</div>
+        </div>
+
+        {/* Interviewing Card */}
+        <div className="stat-card stat-card-amber">
+          <div className="stat-card-content">
+            <p>Interviewing</p>
+            <p className="stat-value">{statusDistribution.Interviewing || 0}</p>
+          </div>
+          <div className="stat-icon">💼</div>
+        </div>
+
+        {/* Offers Card */}
+        <div className="stat-card stat-card-green">
+          <div className="stat-card-content">
+            <p>Offers</p>
+            <p className="stat-value">{statusDistribution.Offered || 0}</p>
+          </div>
+          <div className="stat-icon">🎉</div>
+        </div>
+      </div>
+
+      {/* Chart or Empty State */}
+      {apps.length > 0 ? (
         <div className="chart-container">
           <h3>Status Distribution</h3>
-          <div style={{ height: '300px', position: 'relative' }}>
-            <Pie data={chartData} options={options} />
+          <div className="chart-wrapper">
+            <div className="chart-inner">
+              <Pie data={chartData} options={options} />
+            </div>
           </div>
+        </div>
+      ) : (
+        <div className="empty-state">
+          <div className="empty-state-icon">📋</div>
+          <h3>No applications yet</h3>
+          <p>Start tracking your job applications to see statistics here</p>
         </div>
       )}
     </div>
