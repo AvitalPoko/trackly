@@ -4,7 +4,7 @@ A React + TypeScript app to manage and track your job applications through every
 
 ## Features
 
-- Add, delete, and update job applications
+- Add and delete job applications
 - Track status through the full pipeline: Applied → Interviewing → Offered → Accepted / Rejected
 - Filter applications by status
 - Dashboard with live statistics and a status distribution chart
@@ -40,7 +40,7 @@ frontend/src/
 │   └── StatusFilter.tsx
 ├── constants/        # Shared constants (status colors, labels)
 ├── hooks/            # Custom React hooks
-│   └── useApplications.tsx
+│   └── useApplications.ts
 ├── pages/            # Page-level components
 │   └── ApplicationPage.tsx
 └── types/            # TypeScript type definitions
