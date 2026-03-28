@@ -1,10 +1,18 @@
-import React from "react";
+import { useMemo } from "react";
 import type { Application } from "../types/Application";
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import "./Dashboard.css";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+const COLORS: Record<string, string> = {
+  Applied: "#6b7280",
+  Interviewing: "#f59e0b",
+  Offered: "#10b981",
+  Rejected: "#ef4444",
+  Accepted: "#8b5cf6",
+};
 
 interface DashboardProps {
   apps: Application[];
@@ -13,20 +21,14 @@ interface DashboardProps {
 function Dashboard({ apps }: DashboardProps) {
   const totalApplications = apps.length;
 
-  const statusDistribution = apps.reduce((acc, app) => {
-    acc[app.status] = (acc[app.status] || 0) + 1;
-    return acc;
-  }, {} as Record<string, number>);
+  const statusDistribution = useMemo(() =>
+    apps.reduce((acc, app) => {
+      acc[app.status] = (acc[app.status] || 0) + 1;
+      return acc;
+    }, {} as Record<string, number>),
+  [apps]);
 
-  const COLORS: Record<string, string> = {
-    Applied: "#6b7280",
-    Interviewing: "#f59e0b",
-    Offered: "#10b981",
-    Rejected: "#ef4444",
-    Accepted: "#8b5cf6"
-  };
-
-  const chartData = {
+  const chartData = useMemo(() => ({
     labels: Object.keys(statusDistribution),
     datasets: [{
       data: Object.values(statusDistribution),
@@ -34,7 +36,7 @@ function Dashboard({ apps }: DashboardProps) {
       borderColor: '#fff',
       borderWidth: 2,
     }]
-  };
+  }), [statusDistribution]);
 
   const options = {
     responsive: true,

@@ -18,6 +18,18 @@ const initialApplications: Application[] = [
   },
 ];
 
+function loadApplicationsFromStorage(): Application[] {
+  const storedApps = localStorage.getItem("trackly_apps");
+  if (storedApps) {
+    try {
+      return JSON.parse(storedApps) as Application[];
+    } catch {
+      return initialApplications;
+    }
+  }
+  return initialApplications;
+}
+
 export function useApplications() {
   const [apps, setApps] = useState<Application[]>(loadApplicationsFromStorage); // Lazy initialization to load from localStorage only on first render
 
@@ -42,15 +54,6 @@ export function useApplications() {
       prev.map((a) => (a.id === id ? { ...a, status } : a))
     );
   }
-
-  function loadApplicationsFromStorage(){
-      const storedApps = localStorage.getItem("trackly_apps");
-      if(storedApps) {
-          return JSON.parse(storedApps);
-       }
-   return initialApplications;
-  }
-
 
   return {
     apps,

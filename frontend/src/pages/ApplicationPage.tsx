@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useMemo } from "react";
 import ApplicationCard from "../components/ApplicationCard";
 import { useApplications } from "../hooks/useApplications";
 import ApplicationForm from "../components/ApplicationForm";
@@ -12,9 +12,11 @@ function ApplicationPage() {
 
   const [filterStatus, setFilterStatus] = useState<ApplicationStatus | "All">("All");
 
-  const filteredApps = filterStatus === "All"
-    ? apps
-    : apps.filter((app) => app.status === filterStatus);
+  const filteredApps = useMemo(() =>
+    filterStatus === "All"
+      ? apps
+      : apps.filter((app) => app.status === filterStatus),
+  [filterStatus, apps]);
 
   return (
     <div className="application-page">

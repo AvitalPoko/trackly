@@ -1,4 +1,3 @@
-import React from "react";
 import type { Application, ApplicationStatus } from "../types/Application";
 import "./ApplicationCard.css";
 
