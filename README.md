@@ -56,10 +56,3 @@ Built this project to practice React fundamentals and modern patterns including:
 - Component composition and prop-driven UI updates
 - Form validation and controlled inputs
 
-## Roadmap
-
-- [ ] Edit application modal (full CRUD)
-- [ ] Sort by date, company, or status
-- [ ] Text search across applications
-- [ ] Export to CSV
-- [ ] Unit tests with Vitest
